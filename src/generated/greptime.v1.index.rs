@@ -102,6 +102,11 @@ pub struct InvertedIndexMeta {
     /// The type of bitmap used for indexing.
     #[prost(enumeration = "BitmapType", tag = "9")]
     pub bitmap_type: i32,
+    /// An FST mapping the last key of each FST block to the block's location, used when
+    /// the tag's FST is split into blocks. The value packs `\[offset: u32, size: u32\]`
+    /// relative to `base_offset`, like bitmap locations. Empty when the FST is not split.
+    #[prost(bytes = "vec", tag = "10")]
+    pub fst_block_index: ::prost::alloc::vec::Vec<u8>,
 }
 /// InvertedIndexStats provides statistical data on a tag's inverted index.
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
