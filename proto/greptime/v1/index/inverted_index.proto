@@ -66,6 +66,11 @@ message InvertedIndexMeta {
 
   // The type of bitmap used for indexing.
   BitmapType bitmap_type = 9;
+
+  // An FST mapping the last key of each FST block to the block's location, used when
+  // the tag's FST is split into blocks. The value packs `[offset: u32, size: u32]`
+  // relative to `base_offset`, like bitmap locations. Empty when the FST is not split.
+  bytes fst_block_index = 10;
 }
 
 // InvertedIndexStats provides statistical data on a tag's inverted index.
